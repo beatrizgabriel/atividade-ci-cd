@@ -1,0 +1,31 @@
+name: Pipeline da Atividade
+
+on:
+  push:
+
+jobs:
+  preparacao:
+    name: Job 1 - Preparação
+    runs-on: ubuntu-latest
+    steps:
+      - name: Informar início
+        run: echo "Pipeline iniciado!"
+
+  teste:
+    name: Job 2 - Teste
+    runs-on: ubuntu-latest
+    needs: preparacao
+    steps:
+      - name: Simular teste
+        run: |
+          echo "Executando testes..."
+          test -f README.md
+          echo "Testes concluídos com sucesso!"
+
+  finalizacao:
+    name: Job 3 - Finalização
+    runs-on: ubuntu-latest
+    needs: teste
+    steps:
+      - name: Informar conclusão
+        run: echo "Pipeline finalizado com sucesso!"
