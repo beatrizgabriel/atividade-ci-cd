@@ -11,16 +11,20 @@ jobs:
       - name: Informar início
         run: echo "Pipeline iniciado!"
 
-  teste:
+    teste:
     name: Job 2 - Teste
     runs-on: ubuntu-latest
     needs: preparacao
     steps:
+      - name: Baixar arquivos do repositório
+        uses: actions/checkout@v4
+
       - name: Simular teste
         run: |
           echo "Executando testes..."
           test -f README.md
           echo "Testes concluídos com sucesso!"
+
 
   finalizacao:
     name: Job 3 - Finalização
